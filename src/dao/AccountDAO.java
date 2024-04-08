@@ -109,9 +109,7 @@ public class AccountDAO implements DAOInterface<AccountModel> {
         }
         return list;
     }
-
-    @Override
-    public AccountModel selectById(String t) {
+    public AccountModel selectByUsername(String t) {
         AccountModel acc = null;
         String sql = "SELECT * FROM Account WHERE userName LIKE ?";
         try {
@@ -136,5 +134,31 @@ public class AccountDAO implements DAOInterface<AccountModel> {
         }
         return acc;
     }
-    
+    @Override
+    public AccountModel selectById(int  t){
+        AccountModel acc = null;
+        String sql = "SELECT * FROM Account WHERE id = ?";
+        try {
+            Connection con = db.getCon();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, t );
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String fullName = rs.getString("fullName");
+                String userName = rs.getString("userName");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                int status = rs.getInt("status");
+                String email = rs.getString("email");
+                acc = new AccountModel(fullName, userName, password, role, status, email,id);
+            }
+            rs.close();
+            db.closeConnection(); // Đóng kết nối sau khi tìm kiếm
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return acc;
+    }
+  
 }

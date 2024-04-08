@@ -178,7 +178,7 @@ public class ThemTaiKhoan extends javax.swing.JFrame {
             AccountDAO accDAO = new AccountDAO();
 
             if (!fullName.isEmpty() && !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !role.isEmpty()) {
-                if (accDAO.selectById(userName) == null) {
+                if (accDAO.selectByName(userName) == null) {
                     if (isValid(email)) {
                         AccountDAO accDAO1 = new AccountDAO();
                         AccountModel acc = new AccountModel(fullName, userName, password, role, 1, email);

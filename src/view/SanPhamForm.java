@@ -63,7 +63,7 @@ public class SanPhamForm extends javax.swing.JFrame {
     public DienThoaiModel getDienThoaiSelect() {
         int i_row = jTable1.getSelectedRow();
         DienThoaiDAO dtDAO = new DienThoaiDAO();
-        DienThoaiModel dt = dtDAO.selectById(jTable1.getValueAt(i_row, 2).toString());
+        DienThoaiModel dt = dtDAO.selectByName(jTable1.getValueAt(i_row, 2).toString());
         return dt;
     }
     /**

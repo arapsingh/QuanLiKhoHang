@@ -318,7 +318,7 @@ public class ThemSanPham extends javax.swing.JFrame {
                     !cameraSau.isEmpty() && !chip.isEmpty() && !dungLuong.isEmpty() && !sim.isEmpty() && !pin.isEmpty()
                     && !sac.isEmpty() && !kichThuoc.isEmpty() && !selectedTrangThai.isEmpty() && !ramTxt.getText().isEmpty() 
                     && !weightTxt.getText().isEmpty() && !quantityTxt.getText().isEmpty() && !priceTxt.getText().isEmpty()) {
-                if (dtDAO.selectById(tenDT) == null) {
+                if (dtDAO.selectByName(tenDT) == null) {
                     DienThoaiDAO dtDAO1 = new DienThoaiDAO();
                     DienThoaiModel dt = new DienThoaiModel(tenDT, manHinh, heDieuHanh, cameraTruoc, cameraSau, chip, ram, dungLuong, sim, pin, sac, kichThuoc, khoiLuong, soLuong, gia, status);
                     dtDAO1.insert(dt);

@@ -69,7 +69,7 @@ public class TaiKhoanForm extends javax.swing.JFrame {
     public AccountModel getAccountSelect() {
         int i_row = jTable1.getSelectedRow();
         AccountDAO accDAO = new AccountDAO();
-        AccountModel acc = accDAO.selectById(jTable1.getValueAt(i_row, 2).toString());
+        AccountModel acc = accDAO.selectByName(jTable1.getValueAt(i_row, 2).toString());
         return acc;
     }
 
@@ -268,7 +268,7 @@ public class TaiKhoanForm extends javax.swing.JFrame {
         }
         // Lấy thông tin từ hàng được chọn
         AccountDAO accDAO = new AccountDAO();
-        AccountModel select = accDAO.selectById(jTable1.getValueAt(selectedRow, 2).toString());
+        AccountModel select = accDAO.selectByName(jTable1.getValueAt(selectedRow, 2).toString());
 
         // Kiểm tra và xóa tài khoản nếu được chọn
         if (select != null) {

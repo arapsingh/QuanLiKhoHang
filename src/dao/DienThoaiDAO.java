@@ -141,7 +141,42 @@ public class DienThoaiDAO implements DAOInterface <DienThoaiModel> {
     }
 
     @Override
-    public DienThoaiModel selectById(String t) {
+    public DienThoaiModel selectById(int t) {
+        DienThoaiModel dt = null;
+        String sql = "SELECT * FROM DienThoai WHERE maDT = ?";
+        try {
+            Connection con = db.getCon();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1,  t );
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int maDT = rs.getInt("maDT");
+                String tenDT = rs.getString("tenDT");
+                String manHinh = rs.getString("manHinh");
+                String heDieuHanh = rs.getString("heDieuHanh");
+                String cameraTruoc = rs.getString("cameraTruoc");
+                String cameraSau = rs.getString("cameraSau");
+                String chip = rs.getString("chip");
+                int ram = rs.getInt("ram");
+                String dungLuong = rs.getString("dungLuong");
+                String sim = rs.getString("sim");
+                String pin = rs.getString("pin");
+                String sac = rs.getString("sac");
+                String kichThuoc = rs.getString("kichThuoc");
+                double khoiLuong = rs.getDouble("khoiLuong");
+                int soLuong = rs.getInt("soLuong");
+                double gia = rs.getDouble("gia");
+                int trangThai = rs.getInt("trangThai");
+                dt = new DienThoaiModel(tenDT, manHinh, heDieuHanh, cameraTruoc, cameraSau, chip, ram, dungLuong, sim, pin, sac, kichThuoc, khoiLuong, soLuong, gia, trangThai);
+            }
+            rs.close();
+            db.closeConnection(); // Đóng kết nối sau khi tìm kiếm
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dt;
+    }
+    public DienThoaiModel selectByTenDT(String t) {
         DienThoaiModel dt = null;
         String sql = "SELECT * FROM DienThoai WHERE tenDT LIKE ?";
         try {
@@ -175,6 +210,42 @@ public class DienThoaiDAO implements DAOInterface <DienThoaiModel> {
             e.printStackTrace();
         }
         return dt;
-    }
+    } 
+
+    @Override
+    public DienThoaiModel selectByName(String t) {
+        DienThoaiModel dt = null;
+        String sql = "SELECT * FROM DienThoai WHERE tenDT LIKE ?";
+        try {
+            Connection con = db.getCon();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + t + "%");
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int maDT = rs.getInt("maDT");
+                String tenDT = rs.getString("tenDT");
+                String manHinh = rs.getString("manHinh");
+                String heDieuHanh = rs.getString("heDieuHanh");
+                String cameraTruoc = rs.getString("cameraTruoc");
+                String cameraSau = rs.getString("cameraSau");
+                String chip = rs.getString("chip");
+                int ram = rs.getInt("ram");
+                String dungLuong = rs.getString("dungLuong");
+                String sim = rs.getString("sim");
+                String pin = rs.getString("pin");
+                String sac = rs.getString("sac");
+                String kichThuoc = rs.getString("kichThuoc");
+                double khoiLuong = rs.getDouble("khoiLuong");
+                int soLuong = rs.getInt("soLuong");
+                double gia = rs.getDouble("gia");
+                int trangThai = rs.getInt("trangThai");
+                dt = new DienThoaiModel(tenDT, manHinh, heDieuHanh, cameraTruoc, cameraSau, chip, ram, dungLuong, sim, pin, sac, kichThuoc, khoiLuong, soLuong, gia, trangThai);
+            }
+            rs.close();
+            db.closeConnection(); // Đóng kết nối sau khi tìm kiếm
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dt;}
     
 }
